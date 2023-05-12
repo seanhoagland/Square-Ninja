@@ -11,6 +11,7 @@ public class Click {
     public static Vector2f position;
     public static boolean clicked;
 
+    //sets cursor position and if mouse is clicked
     public static void update(long window) {
         clicked = checkClick(window);
 
@@ -20,6 +21,7 @@ public class Click {
         position = new Vector2f( (float) posX.get(0), (float) posY.get(0) );
     }
 
+    //checks if mouse is clicked
     private static boolean checkClick(long window) {
         int mouseState = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
         if (mouseState == GLFW_PRESS)
@@ -27,6 +29,7 @@ public class Click {
         return false;
     }
 
+    //get position of mouse click
     public static Vector2f ConvertClickPositionToRealCoordinates(Camera camera, Vector2f input, float scale) {
         // Determine Top Left of Screen
         float x = -camera.getPosition().x - camera.getWidth() / 2;

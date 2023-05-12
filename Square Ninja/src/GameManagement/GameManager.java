@@ -60,7 +60,8 @@ public class GameManager {
         }
         if (lives <= 0) { //ends game if you run out of lives
             score = 0;
-            System.exit(0);
+            window.closeWindow();
+
         }else {
             for (int i = world.totalEntities(); i < maxEntities; i++) { //spawns squares until it reaches the max number of squares
                 int randSpeed = (int) speedModifier + rand.nextInt(10); //sets speed of squares using speedModifier and a random

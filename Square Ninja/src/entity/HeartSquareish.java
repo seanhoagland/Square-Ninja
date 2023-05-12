@@ -24,8 +24,8 @@ public class HeartSquareish extends Entity {
 
     @Override
     public void DestroySquare(GameManager gameManager) {
-        if (gameManager.lives > 0 && gameManager.lives <=2) {
-            gameManager.lives++;
+        if (gameManager.lives > 0 && gameManager.lives <=2) { //if the player has room to gain lives
+            gameManager.lives++; //adds to lives
             System.out.println("LIVES: " + gameManager.lives);
         }
 

@@ -25,11 +25,11 @@ public class PinkSquare extends Entity {
     /** Destroys Square When Clicked On */
     @Override
     public void DestroySquare(GameManager gameManager) {
-        gameManager.score += 50;
+        gameManager.score += 50; //adds to score
     }
 
     @Override
     public void NoClickDestroy(GameManager gameManager) {
-        gameManager.lives = 0;
+        gameManager.lives = 0; //removes all lives from player
     }
 }

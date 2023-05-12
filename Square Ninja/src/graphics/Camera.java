@@ -16,7 +16,7 @@ public class Camera {
     // above (0,0). -304, 224 represents the leftmost, upmost position the camera can be in before entities render improperly. There is 160x160 extra room for
     // entities coming down.
 
-
+    //camera position
     public Camera(int width, int height) {
             position = new Vector3f(-29*16,24*16,0); // multiply actual position on screen for entities by 16.
             setProjection(640,480);

@@ -24,7 +24,7 @@ public class RedSquare extends Entity {
 
     @Override
     public void DestroySquare(GameManager gameManager) {
-        gameManager.lives--;
+        gameManager.lives--; //subtracts from lives
         System.out.println("LIVES: " + gameManager.lives);
     }
 

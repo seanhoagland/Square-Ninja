@@ -25,12 +25,12 @@ public class OrangeSquare extends Entity {
     /** Destroys Square When Clicked On */
     @Override
     public void DestroySquare(GameManager gameManager) {
-        gameManager.score += 20;
+        gameManager.score += 20; //adds to score
     }
 
     @Override
     public void NoClickDestroy(GameManager gameManager) {
-        gameManager.lives--;
+        gameManager.lives--; //subtracts from lives
         System.out.println("LIVES: " + gameManager.lives);
     }
 }

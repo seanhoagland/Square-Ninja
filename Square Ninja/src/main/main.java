@@ -8,6 +8,8 @@ import graphics.Shader;
 import graphics.Window;
 import org.lwjgl.Version;
 import org.lwjgl.opengl.GL;
+import world.StartScreen;
+import world.Background;
 import world.TileRenderer;
 import world.World;
 import static org.lwjgl.glfw.GLFW.*;
@@ -20,7 +22,12 @@ public class main {
 // Note 10 Spaces Indicates New Function/End of Previous Function ONLY in Main
 
     public static World world;
+    public static StartScreen startScreen;
+    public static Background background;
     public static double startTime;
+    public static Window window;
+
+    public static boolean gameplayBool = true;
 
 
 
@@ -33,10 +40,10 @@ public class main {
     // Loops window so it stays open and runs various functions
     public static void loop() {
         // Create window object
-        Window window = new Window();
+        window = new Window();
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         window.createWindow("CFB WIP"); // Creates window using window object
-        // Imperative this is at the top, sets capabilities so window can make squares, textures etc.
+        // sets capabilities so window can make squares, textures etc.
         GL.createCapabilities();
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);
@@ -56,11 +63,13 @@ public class main {
         glClearColor(0.0f, 1.0f, 0.0f, 0.0f); // Window Initial Color
 
         world = new World(camera, window);
+        startScreen = new StartScreen("startScreen.png");
+        background = new Background("woodBackground.png");
 
         double frame_cap = 1.0 / 60.0; // Max frames per second
 
         double time = Timer.getTime(); // Sets First Time, enabling us to calculate the time in the future and use that with this time to get the time in between to decide whether a frame should be produced. whether
-        startTime = time;
+
         double unprocessed = 0; // unprocessed time. The time where nothing has occured yet, but waiting in queue to produce a frame when the time gets high enugh.
         double frame_time = 0; // The total time the loop (max 1s) has been running for. When reaching 1, this will reset and output the total frames created. Used to calculate FPS
         int frames = 0; // Total Number of frames that have occured. When frame_time = 1s, this will output the frames produced in 1s (fps) and will set to 0.
@@ -89,6 +98,8 @@ public class main {
                 }
 
 
+
+
                 if (world.canRun) {
                     world.update((float) frame_cap, window, camera);
                     world.correctCamera(camera, window);
@@ -96,23 +107,36 @@ public class main {
 
 
 
+                if (StartScreen.canRun) {
+                    updateStartScreen();
+                }
+
+
+
                 // updates keys
                 window.update();
 
-                // Outputs FPS
-                if (frame_time >= 1.0) { // When Frame_time = 1.0, reset frame_time and print frames as well as set frames to 0.
-                    frame_time = 0;
-                    System.out.println("FPS: " + frames); // Thus, this prints fps
-                    frames = 0;
-                }
+
             }
 
             // Renders images only if they are enabled to render as determined by a boolean activated once every frame at a rate of the given fps, 60.
             if (can_render) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Framebuffer
 
+                if (Background.canRun) {
+                    background.render(shader, camera);
+                }
+
+                if (StartScreen.canRun) {
+                    startScreen.render(shader, camera);
+                }
+
                 if (world.canRun) {
                     world.render(tiles, shader, camera, window);
+                    if (gameplayBool){
+                        startTime = Timer.getTime();
+                        gameplayBool = false;
+                    }
                 }
 
                 frames++; // total frames increases when 1 frame render is performed
@@ -151,6 +175,13 @@ public class main {
     public static double getTime_passed(){
         double result = Timer.getTime() - startTime;
         return result;
+    }
+
+    public static void updateStartScreen() {
+        if (window.getInput().isKeyPressed(GLFW_KEY_SPACE)) {
+            World.canRun = true;
+            StartScreen.canRun = false;
+        }
     }
 
 

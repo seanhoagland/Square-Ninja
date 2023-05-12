@@ -124,7 +124,7 @@ public class Window {
 
     public int getWidth() { return width; } // Returns window width
     public int getHeight() { return height; } // Returns window height
-    public boolean isFullscreen() { return fullscreen; } // returns if fullscreen is set to true or false
+
     public long getWindow() { return window; } // returns window handle
     public Input getInput() { return input; } // returns the current input (Mouse and Keyboard)
 

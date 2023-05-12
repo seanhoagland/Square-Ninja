@@ -25,58 +25,11 @@ public class World {
     private int width;
     private int height;
     private int scale;
-    public static boolean canRun = true;
+    public static boolean canRun = false;
     public GameManager gameManager;
 
     private Matrix4f world;
     public Window window;
-
-
-
-
-/*
-    public World(String background, Window window) { // Load world from file
-
-        try {
-             BufferedImage tile_sheet = ImageIO.read(new File("res/backgrounds/" + background + ".png"));
-
-             width = tile_sheet.getWidth();
-             height = tile_sheet.getHeight();
-             scale = 16;
-
-            int[] colorTileSheet = tile_sheet.getRGB(0,0,tile_sheet.getWidth(),tile_sheet.getHeight(), null, 0, tile_sheet.getWidth());
-
-            this.world = new Matrix4f().setTranslation(new Vector3f(0));
-            this.world.scale(scale);// Tiles are 32x32, since scale = 16 * 2 due to renderTile using 2*length
-
-            tiles = new int[width*height];
-            bounding_boxes = new AABB[width * height];
-            entities = new ArrayList<Entity>();
-
-            for (int y = 0; y < tile_sheet.getHeight(); y++) { // x and y represent id of tile
-                for (int x = 0; x < tile_sheet.getWidth(); x++) {
-                    int red = (colorTileSheet[x + y * tile_sheet.getWidth()] >> 16) & 0xFF; // represents red on tile of grid of map
-
-                    Tile t;
-                    try {
-                        t = Tile.tiles[red];
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        t = null;
-                    }
-
-                    if (t != null) {
-                        setTile(t, x, y); // sets tile
-                    }
-
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-*/
-
-
 
 
 
@@ -103,6 +56,7 @@ public class World {
 
 
     public void render(TileRenderer render, Shader shader, Camera camera, Window window) {
+        /*
         int posX = ((int) camera.getPosition().x / (scale * 2));
         int posY = ((int) camera.getPosition().y / (scale * 2));
 
@@ -113,7 +67,7 @@ public class World {
                     render.renderTile(t, count - posX - (viewX / 2) + 1, -counter - posY + (viewY / 2), shader, world, camera, this);
                 }
             }
-        }
+        } */
 
         for (Entity entity : entities) {
             entity.render(shader, camera, window, this);

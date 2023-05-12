@@ -10,6 +10,7 @@ public class AABB {
         this.half_extent = half_extent;
     }
 
+    //defines collision object
     public Collision getCollision(AABB box2) {
         Vector2f distance = box2.center.sub(center, new Vector2f());
         distance.x = (float) Math.abs(distance.x);
@@ -20,6 +21,7 @@ public class AABB {
         return new Collision(distance,distance.x < 0 && distance.y < 0);
     }
 
+    //corrects position
     public void correctPosition(AABB box2, Collision data) {
         Vector2f correction = box2.center.sub(center, new Vector2f());
         if (data.distance.x > data.distance.y) {

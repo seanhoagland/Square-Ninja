@@ -25,7 +25,7 @@ public class GoldSquare extends Entity {
     /** Destroys Square When Clicked On */
     @Override
     public void DestroySquare(GameManager gameManager) {
-        gameManager.score += 100;
+        gameManager.score += 100; //adds to score
     }
 
     @Override

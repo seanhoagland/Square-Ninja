@@ -42,9 +42,11 @@ public abstract class Entity {
     }
 
     public abstract void update(float delta, Window window, Camera camera, World world);
-    /** Destroys Square When Clicked On */
+
+    //Destroys Square When Clicked On
     public abstract void DestroySquare(GameManager gameManager);
-    /** Destroys Square When Not Clicked On Or For Any Other Rzn */
+
+    // Destroys Square When Not Clicked On Or For Any Other Rzn
     public abstract void NoClickDestroy(GameManager gameManager);
 
     public void move(Vector2f direction) {
@@ -170,9 +172,8 @@ public abstract class Entity {
     }
 
 
-   /** GAMEMANAGEMENT BASED FUNCTIONALITIES FOR ENTITIES */
 
-
+// moves the square down the screen depending on the speed
     protected void MoveDownScreen(float delta, float speed) {
         this.transform.pos.y -= speed * delta;
     }

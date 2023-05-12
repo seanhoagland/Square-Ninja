@@ -28,10 +28,10 @@ public class IceSquare extends Entity {
     /** Destroys Square When Clicked On */
     @Override
     public void DestroySquare(GameManager gameManager) {
-        //slows down all squares on screen for 10 sec
-        gameManager.tempSpeedModifier = gameManager.speedModifier;
-        gameManager.speedModifier = 10;
-        gameManager.iceCooldown = false;
+
+        gameManager.tempSpeedModifier = gameManager.speedModifier; //records speedModifier
+        gameManager.speedModifier = 10; //resets speedModifier
+        gameManager.iceCooldown = false; //determines if an ice can spawn again
 
     }
 
