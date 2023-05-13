@@ -26,8 +26,8 @@ public class FrenzySquare extends Entity {
     /** Destroys Square When Clicked On */
     @Override
     public void DestroySquare(GameManager gameManager) {
-        GameManager.frenzyTime = true; //activiates frenzy config
-        GameManager.frenzyStartTime = main.getTime_passed(); //records the start time when frenzy was hit
+        gameManager.frenzyTime = true; //activiates frenzy config
+        gameManager.frenzyStartTime = main.getTime_passed(); //records the start time when frenzy was hit
     }
 
     @Override

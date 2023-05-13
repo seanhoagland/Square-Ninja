@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import main.main;
 
 public class World {
     private int viewX;
@@ -48,8 +49,9 @@ public class World {
 
         entities = new ArrayList<Entity>();
         textList = new ArrayList<Text>();
-        textList.add(new Text(new Vector2f(-37, 26), "Score : 0", window, 8, 1.85f));
-        textList.add(new Text(new Vector2f(-37, 23), "Lives : " + (char) 3 + (char) 3 + (char) 3, window, 8, 1.85f));
+        textList.add(new Text(new Vector2f(-37, 26), "Score: 0", window, 8, 1.85f));
+        textList.add(new Text(new Vector2f(-37, 23), "Lives: " + (char) 3 + (char) 3 + (char) 3, window, 8, 1.85f));
+        textList.add(new Text(new Vector2f(25, 26), "Time: 0", window, 8, 1.85f));
         this.window = window;
 
         gameManager = new GameManager(camera, this, window,3, 0);
@@ -109,12 +111,14 @@ public class World {
         }
 
         textList.get(0).SetCharacters("Score:" + gameManager.score);
+
         String result = "Lives: ";
         for (int i = 0; i < gameManager.lives; i++){
             result += (char) 3;
         }
-
         textList.get(1).SetCharacters(result);
+
+        textList.get(2).SetCharacters("Time:" + (int) main.getTime_passed());
 
         gameManager.update();
     }
@@ -183,6 +187,14 @@ public class World {
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    public String getFinalScore(){
+        return gameManager.finalScore;
+    }
+
+    public String getFinalTime(){
+        return gameManager.finalTime;
     }
 
 

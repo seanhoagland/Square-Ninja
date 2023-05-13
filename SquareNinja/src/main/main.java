@@ -8,10 +8,8 @@ import graphics.Shader;
 import graphics.Window;
 import org.lwjgl.Version;
 import org.lwjgl.opengl.GL;
-import world.StartScreen;
-import world.Background;
-import world.TileRenderer;
-import world.World;
+import world.*;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import GameManagement.GameManager;
@@ -24,6 +22,7 @@ public class main {
     public static World world;
     public static StartScreen startScreen;
     public static Background background;
+    public static EndScreen endScreen;
     public static double startTime;
     public static Window window;
 
@@ -65,6 +64,7 @@ public class main {
         world = new World(camera, window);
         startScreen = new StartScreen("startScreen.png");
         background = new Background("woodBackground.png");
+        endScreen = new EndScreen("endScreen.png");
 
         double frame_cap = 1.0 / 60.0; // Max frames per second
 
@@ -111,6 +111,10 @@ public class main {
                     updateStartScreen();
                 }
 
+                if (EndScreen.canRun) {
+                    updateEndScreen();
+                }
+
 
 
                 // updates keys
@@ -135,9 +139,16 @@ public class main {
                     world.render(tiles, shader, camera, window);
                     if (gameplayBool){
                         startTime = Timer.getTime();
+                        world = new World(camera, window);
                         gameplayBool = false;
                     }
                 }
+
+                if (EndScreen.canRun){
+                    endScreen.render(shader, camera , window, world.getFinalScore(), world.getFinalTime());
+                }
+
+
 
                 frames++; // total frames increases when 1 frame render is performed
 
@@ -180,7 +191,16 @@ public class main {
     public static void updateStartScreen() {
         if (window.getInput().isKeyPressed(GLFW_KEY_SPACE)) {
             World.canRun = true;
+            gameplayBool = true;
             StartScreen.canRun = false;
+        }
+    }
+
+    public static void updateEndScreen() {
+        if (window.getInput().isKeyPressed(GLFW_KEY_SPACE)) {
+            World.canRun = true;
+            gameplayBool = true;
+            EndScreen.canRun = false;
         }
     }
 

@@ -8,6 +8,7 @@ import graphics.Window;
 import org.joml.Vector2f;
 import world.World;
 import main.main;
+import world.EndScreen;
 
 
 import java.util.Random;
@@ -15,6 +16,9 @@ import java.util.Random;
 public class GameManager {
     public int lives = 3;
     public int score = 0;
+
+    public String finalScore = "";
+    public String finalTime = "";
     public int maxEntities;
     public World world;
     public Camera camera;
@@ -26,20 +30,20 @@ public class GameManager {
     int redPercent = 0;
     int orangePercent = 0;
     int icePercent = 0;
-    public static boolean iceCooldown; //tracks when ice is able to spawn again
+    public boolean iceCooldown; //tracks when ice is able to spawn again
     double iceDropStart = 0; //time when ice spawns
     int heartPercent = 0;
     double heartDropStart = 0; //time when heart spawns
     int frenzyPercent = 0;
-    public static boolean frenzyTime = false; //tracks when frenzyCofig is being used
-    public static double frenzyStartTime = 0; //time when frenzy spawns
-    public static double frenzyEndTime = 0; //time when frenzy can spawn again
+    public boolean frenzyTime = false; //tracks when frenzyCofig is being used
+    public double frenzyStartTime = 0; //time when frenzy spawns
+    public double frenzyEndTime = 0; //time when frenzy can spawn again
     int pinkPercent = 0;
     int goldPercent = 0;
 
-    public static double speedModifier = 10; //modifier added onto the random speed calculated
+    public double speedModifier = 10; //modifier added onto the random speed calculated
 
-    public static double tempSpeedModifier; //temp speedModifier that saves speedModifier when ice halves it
+    public double tempSpeedModifier; //temp speedModifier that saves speedModifier when ice halves it
 
     static double speedModTimeStart = 1; //time when speedModifier increased
     static double speedModTimeEnd; //next time when speedModifier increases
@@ -59,8 +63,11 @@ public class GameManager {
             iceCooldown = true; //allows ice to spawn again
         }
         if (lives <= 0) { //ends game if you run out of lives
-            score = 0;
-            window.closeWindow();
+            finalScore += score;
+            finalTime += (int) main.getTime_passed();
+            World.canRun = false;
+            EndScreen.canRun = true;
+
 
         }else {
             for (int i = world.totalEntities(); i < maxEntities; i++) { //spawns squares until it reaches the max number of squares
@@ -324,4 +331,6 @@ public class GameManager {
         entity.NoClickDestroy(this);
         world.RemoveEntity(index);
     }
+
+
 }
