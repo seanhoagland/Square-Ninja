@@ -345,14 +345,14 @@ public class GameManager {
         float currentHighTime = Float.parseFloat(data[1]);
 
         finalHighScore = currentHighScore + "";
-        finalHighScoreTime = (currentHighTime + "").substring(0, 6);
+        finalHighScoreTime = currentHighTime + "";
 
         if (score > currentHighScore || (score == currentHighScore && time < currentHighTime)) {
             System.out.println("NEW HIGH SCORE");
             WriteFile(location, score + "\n"+ time);
 
             finalHighScore = score + "";
-            finalHighScoreTime = (time + "").substring(0, 6);
+            finalHighScoreTime = time + "";
         }
     }
 

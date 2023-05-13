@@ -34,8 +34,8 @@ public class EndScreen {
         textList = new ArrayList<Text>();
         textList.add(new Text(new Vector2f(-7, 7), finalScore, window, 16, 1.85f));
         textList.add(new Text(new Vector2f(13, 7), finalTime, window, 16, 1.85f));
-        textList.add(new Text(new Vector2f(-9, -5.75f), highScore, window, 12, 1.5f));
-        textList.add(new Text(new Vector2f(14f, -5.75f), highFinalTime, window, 12, 1.5f));
+        textList.add(new Text(new Vector2f(-9, -5.75f), highScore, window, 12, 1.75f));
+        textList.add(new Text(new Vector2f(14f, -5.75f), highFinalTime, window, 12, 1.75f));
 
         for (Text text : textList){
             text.render();
