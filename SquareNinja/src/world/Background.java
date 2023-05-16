@@ -21,6 +21,7 @@ public class Background {
         translation = new Matrix4f();
     }
 
+    //projects image on screen
     public void render(Shader shader, Camera camera) {
         Matrix4f mat = new Matrix4f();
         camera.getUntransformedProjection().scale(320, 240, 1, mat);

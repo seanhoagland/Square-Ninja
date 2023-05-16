@@ -24,6 +24,7 @@ public class EndScreen {
         translation = new Matrix4f();
     }
 
+    //renders image over screen and displays record stats and round stats on the screen
     public void render(Shader shader, Camera camera, Window window, String finalScore, String finalTime, String highScore, String highFinalTime) {
         Matrix4f mat = new Matrix4f();
         camera.getUntransformedProjection().scale(320, 240, 1, mat);

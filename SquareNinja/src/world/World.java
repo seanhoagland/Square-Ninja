@@ -36,6 +36,7 @@ public class World {
 
 
 
+    //adds text to arraylist
     public World(Camera camera, Window window) { // straight red world
         width = 64; // width of world
         height = 64; // height of world
@@ -94,8 +95,7 @@ public class World {
 
 
 
-
-
+    //updates entity positions, score, lives, and time on the screen
     public void update(float delta, Window window, Camera camera) {
         for (Entity entity : entities) {
             entity.UpdateBoundingBox();

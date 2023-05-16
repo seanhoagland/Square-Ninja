@@ -21,6 +21,7 @@ public class StartScreen {
         translation = new Matrix4f();
     }
 
+    //renders image over screen
     public void render(Shader shader, Camera camera) {
         Matrix4f mat = new Matrix4f();
         camera.getUntransformedProjection().scale(320, 240, 1, mat);

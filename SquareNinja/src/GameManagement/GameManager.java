@@ -50,10 +50,10 @@ public class GameManager {
 
     public double speedModifier = 10; //modifier added onto the random speed calculated
 
-    public double tempSpeedModifier; //temp speedModifier that saves speedModifier when ice halves it
+    public double tempSpeedModifier = 0; //temp speedModifier that saves speedModifier when ice halves it
 
-    static double speedModTimeStart = 1; //time when speedModifier increased
-    static double speedModTimeEnd; //next time when speedModifier increases
+    public double speedModTimeStart = 1; //time when speedModifier increased
+    public double speedModTimeEnd = 100; //next time when speedModifier increases
 
     //method always running to decide when and what square should spawn
     public void update() {
@@ -69,12 +69,12 @@ public class GameManager {
             }
             iceCooldown = true; //allows ice to spawn again
         }
-        if (lives <= 0) { //ends game if you run out of lives
+        if (lives <= 0) { //records the final score and sets high score if applicable
             finalScore += score;
             finalTime += (int) main.getTime_passed();
             AttemptToWriteHighscore(score, (float) main.getTime_passed(), "highs");
-            EndScreen.canRun = true;
-            World.canRun = false;
+            EndScreen.canRun = true; //runs game over screen
+            World.canRun = false; //stops running gameplay
         }else {
             for (int i = world.totalEntities(); i < maxEntities; i++) { //spawns squares until it reaches the max number of squares
                 int randSpeed = (int) speedModifier + rand.nextInt(10); //sets speed of squares using speedModifier and a random
@@ -263,7 +263,7 @@ public class GameManager {
     }
 
     //constantly increases speedModifier by .2 every second
-    public static double speedModIncreaser(double speedMod){
+    public double speedModIncreaser(double speedMod){
         double modifier = speedMod;
         speedModTimeEnd = main.getTime_passed();
         if ((speedModTimeEnd - speedModTimeStart) >= 1){
@@ -275,7 +275,7 @@ public class GameManager {
     }
 
     //exponentially increases speedModifier to where it was before the ice was hit over a span of 10 seconds
-    public static double iceSpeedModIncreaser(double speedMod){
+    public double iceSpeedModIncreaser(double speedMod){
         double modifier = speedMod;
         speedModTimeEnd = main.getTime_passed();
         if ((speedModTimeEnd - speedModTimeStart) >= 1){
@@ -356,6 +356,7 @@ public class GameManager {
         }
     }
 
+    //gets high score from file
     public String[] getFileInfo(String location) {
         String[] data = new String[2];
         try {
@@ -374,6 +375,7 @@ public class GameManager {
         return data;
     }
 
+    //writes high score into file
     public void WriteFile(String location, String data) {
         try {
             FileWriter myWriter = new FileWriter("scores/" + location);

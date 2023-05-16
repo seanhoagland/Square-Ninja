@@ -108,11 +108,11 @@ public class main {
 
 
                 if (StartScreen.canRun) {
-                    updateStartScreen();
+                    updateStartScreen(); //checks is spacebar is pressed to start gameplay
                 }
 
                 if (EndScreen.canRun) {
-                    updateEndScreen();
+                    updateEndScreen(); //checks if spacebar is pressed to retry or esc is pressed to close the game
                 }
 
 
@@ -127,17 +127,20 @@ public class main {
             if (can_render) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Framebuffer
 
+                //renders background first
                 if (Background.canRun) {
                     background.render(shader, camera);
                 }
 
+                //renders start screen over ackground
                 if (StartScreen.canRun) {
                     startScreen.render(shader, camera);
                 }
 
+                //runs gameplay
                 if (world.canRun) {
                     world.render(tiles, shader, camera, window);
-                    if (gameplayBool){
+                    if (gameplayBool){ //gets round start time and refreshes the world/gameplay
                         startTime = Timer.getTime();
                         world = new World(camera, window);
                         gameplayBool = false;
@@ -183,11 +186,13 @@ public class main {
         glfwTerminate();
     }
 
+    //returns change in time
     public static double getTime_passed(){
         double result = Timer.getTime() - startTime;
         return result;
     }
 
+    //starts gameplay if space is pressed
     public static void updateStartScreen() {
         if (window.getInput().isKeyPressed(GLFW_KEY_SPACE)) {
             World.canRun = true;
@@ -196,6 +201,7 @@ public class main {
         }
     }
 
+    //restarts gameplay if space is pressed
     public static void updateEndScreen() {
         if (window.getInput().isKeyPressed(GLFW_KEY_SPACE)) {
             World.canRun = true;
